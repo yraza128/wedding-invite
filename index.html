@@ -3,988 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Major Yasir & D/o Muhammad Taj Sabir</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
+    <title>Wedding Invitation - Major Yasir & D/o Muhammad Taj Sabir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        mehandi: {
-                            bg: '#fbfcf9',
-                            border: '#15803d',
-                            text: '#14532d',
-                            gold: '#d4af37'
-                        },
-                        baraat: {
-                            bg: '#fffdf7',
-                            border: '#800020',
-                            accent: '#b8860b',
-                            rose: '#d9777f'
-                        },
-                        walima: {
-                            bg: '#fbfaff',
-                            purple: '#6b46c1',
-                            lavender: '#8b5cf6',
-                            text: '#4c1d95'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['Cinzel', 'serif'],
-                        script: ['Alex Brush', 'cursive'],
-                        scriptAlt: ['Great Vibes', 'cursive'],
-                        sans: ['Montserrat', 'sans-serif'],
-                        arabic: ['Amiri', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .arabic-bismillah {
-            font-family: 'Amiri', serif;
+        :root {
+            --mehandi-green: #1b4332;
+            --mehandi-gold: #d4af37;
+            --baraat-red: #5c1d24;
+            --baraat-gold: #c5a059;
+            --walima-purple: #3c2a4d;
+            --walima-gold: #b39ddb;
+            --bg-cream: #faf9f5;
         }
 
-        .gold-border-frame {
-            border: 2px solid #d4af37;
-            box-shadow: inset 0 0 0 4px #ffffff, inset 0 0 0 6px #d4af37;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-cream); color: #333; line-height: 1.6; }
+
+        /* Floating Animation */
+        @keyframes floatSlow {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .card-shadow {
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08), 0 0 15px rgba(212, 175, 55, 0.12);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Toast notification */
-        #toast {
-            transition: all 0.3s ease-in-out;
+        .animated-card {
+            animation: floatSlow 6s ease-in-out infinite, fadeIn 1s ease-out;
         }
+
+        /* Top Action Bar */
+        .top-bar {
+            background: #111; color: white; padding: 12px 20px; text-align: center;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .top-bar h1 { font-size: 1.1rem; font-family: 'Cinzel', serif; color: var(--baraat-gold); }
+        .btn-group { display: flex; gap: 8px; }
+        .action-btn {
+            background: var(--baraat-gold); color: #111; border: none; padding: 6px 14px;
+            border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
+            transition: 0.2s; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .action-btn:hover { opacity: 0.9; transform: scale(1.05); }
+
+        /* Guest Greeting Banner */
+        .guest-banner {
+            max-width: 700px; margin: 20px auto; background: linear-gradient(135deg, #fff, #f4f1ea);
+            border: 2px dashed var(--baraat-gold); border-radius: 12px; padding: 20px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: fadeIn 0.8s ease-out;
+        }
+        .guest-banner h2 { font-family: 'Cinzel', serif; color: var(--baraat-red); font-size: 1.5rem; margin-bottom: 8px; }
+        .guest-banner p { font-size: 0.95rem; color: #555; }
+
+        /* Container */
+        .container { max-width: 800px; margin: 0 auto; padding: 15px; }
+
+        /* Wedding Card Layout */
+        .wedding-card {
+            background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            margin-bottom: 40px; overflow: hidden; position: relative; border: 8px solid #fff;
+            transition: transform 0.3s ease;
+        }
+        .card-inner { padding: 40px 30px; text-align: center; position: relative; }
+
+        /* Theme Styles */
+        .theme-mehandi { border-color: var(--mehandi-green); background: linear-gradient(to bottom, #ffffff, #f4f9f4); }
+        .theme-baraat { border-color: var(--baraat-red); background: linear-gradient(to bottom, #ffffff, #fcf8f5); }
+        .theme-walima { border-color: var(--walima-purple); background: linear-gradient(to bottom, #ffffff, #f7f5fa); }
+
+        .bismillah { font-family: 'Great Vibes', cursive; font-size: 2rem; color: #888; margin-bottom: 10px; }
+        .hosts { font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; color: #555; text-transform: uppercase; margin-bottom: 15px; }
+        .event-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; line-height: 1.1; margin: 15px 0; }
+        
+        .theme-mehandi .event-title { color: var(--mehandi-green); }
+        .theme-baraat .event-title { color: var(--baraat-red); }
+        .theme-walima .event-title { color: var(--walima-purple); }
+
+        .couple-names { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: #222; margin: 15px 0; }
+        .date-box { display: inline-block; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 10px 20px; margin: 15px 0; font-family: 'Cinzel', serif; font-weight: 600; color: #444; }
+        
+        .details-list { margin: 20px 0; font-size: 1.05rem; color: #444; }
+        .details-list p { margin: 8px 0; }
+        .venue-box { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .venue-box h4 { font-family: 'Cinzel', serif; margin-bottom: 5px; color: #111; }
+        
+        .map-btn {
+            display: inline-block; margin-top: 10px; background: #25d366; color: white; padding: 8px 18px;
+            border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: 600; box-shadow: 0 3px 10px rgba(37,211,102,0.3);
+        }
+
+        /* RSVP Section */
+        .rsvp-section { background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-top: 30px; text-align: center; }
+        .rsvp-section h3 { font-family: 'Cinzel', serif; color: var(--baraat-red); margin-bottom: 15px; }
+        .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+            width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; font-family: 'Poppins', sans-serif;
+        }
+        .rsvp-submit {
+            background: var(--baraat-red); color: white; border: none; padding: 12px 30px;
+            border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 10px; font-size: 1rem;
+        }
+
+        /* Modal for Sharing */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; text-align: left; position: relative; }
+        .modal-content h3 { font-family: 'Cinzel', serif; margin-bottom: 15px; color: var(--baraat-red); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; }
     </style>
 </head>
-<body class="bg-stone-100 text-stone-800 font-sans antialiased min-h-screen selection:bg-amber-200 selection:text-amber-900">
+<body>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 bg-stone-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 border border-amber-400">
-        <i class="fa-solid fa-circle-check text-amber-400 text-base" id="toastIcon"></i>
-        <span id="toastMsg">Action completed!</span>
-    </div>
-
-    <!-- Customized Link Guest Welcome Banner -->
-    <div id="customGuestBanner" class="hidden bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-amber-50 text-xs py-2.5 px-4 text-center shadow-md border-b border-amber-500/40 relative">
-        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-2">
-            <span id="customGuestText" class="font-serif font-medium"><i class="fa-solid fa-envelope-open-text text-amber-300 mr-1.5"></i> You have received a personalized wedding invitation!</span>
-            <button onclick="showAllEventsToggle()" id="toggleAllBtn" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-md text-[11px] font-semibold transition border border-white/20">
-                View All Wedding Events
-            </button>
+    <!-- Top Action Navigation -->
+    <div class="top-bar">
+        <h1>Major Yasir's Wedding Portal</h1>
+        <div class="btn-group">
+            <button class="action-btn" onclick="openShareModal()"><i class="fa-solid fa-share-nodes"></i> Share Custom Link</button>
         </div>
     </div>
 
-    <!-- Sticky Navigation & Control Bar -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-200/50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl font-script text-amber-700">Y & T</span>
-                <span class="text-xs uppercase tracking-widest text-stone-500 font-semibold border-l pl-2 border-stone-300">Wedding Invite</span>
-            </div>
+    <div class="container">
+        <!-- Elaborate Guest Welcome Banner -->
+        <div class="guest-banner animated-card">
+            <h2 id="welcomeGuestTitle">Warm Greetings!</h2>
+            <p id="welcomeGuestDesc">You are cordially invited to celebrate the joyous wedding festivities of Major Yasir & D/o Muhammad Taj Sabir. Below are your personalized event invitations, timings, and venue details.</p>
+        </div>
 
-            <!-- Custom Event Selector Toggles -->
-            <div class="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
-                <span class="text-xs font-bold text-stone-600 whitespace-nowrap hidden sm:inline"><i class="fa-solid fa-filter text-amber-600 mr-1"></i> Visible:</span>
-                <button onclick="toggleEvent('mehandi')" id="filter-mehandi" class="px-3 py-1 text-xs font-medium rounded-full border transition-all duration-300 flex items-center gap-1 bg-emerald-50 text-emerald-800 border-emerald-400 shadow-sm">
-                    <i class="fa-solid fa-check text-xs" id="check-mehandi"></i> Mehandi
-                </button>
-                <button onclick="toggleEvent('baraat')" id="filter-baraat" class="px-3 py-1 text-xs font-medium rounded-full border transition-all duration-300 flex items-center gap-1 bg-amber-50 text-amber-900 border-amber-400 shadow-sm">
-                    <i class="fa-solid fa-check text-xs" id="check-baraat"></i> Baraat
-                </button>
-                <button onclick="toggleEvent('walima')" id="filter-walima" class="px-3 py-1 text-xs font-medium rounded-full border transition-all duration-300 flex items-center gap-1 bg-purple-50 text-purple-900 border-purple-400 shadow-sm">
-                    <i class="fa-solid fa-check text-xs" id="check-walima"></i> Walima
-                </button>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex items-center space-x-2">
-                <button onclick="toggleAudio()" id="musicBtn" class="p-2 text-stone-700 hover:text-amber-700 hover:bg-amber-50 rounded-full transition" title="Toggle Soft Music">
-                    <i class="fa-solid fa-music text-lg" id="musicIcon"></i>
-                </button>
-                <button onclick="openShareModal()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3 py-2 rounded-lg font-semibold shadow transition flex items-center gap-1">
-                    <i class="fa-solid fa-share-nodes"></i> <span class="hidden sm:inline">Share Custom Link</span>
-                </button>
-                <a href="#rsvp" class="bg-stone-900 hover:bg-stone-800 text-white text-xs px-3 py-2 rounded-lg font-semibold shadow transition">
-                    RSVP
-                </a>
+        <!-- CARD 1: MEHANDI -->
+        <div id="card-mehandi" class="wedding-card theme-mehandi animated-card">
+            <div class="card-inner">
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="hosts">Mr. & Mrs. Mulazim Hussain</div>
+                <div class="event-title">Mehandi Ceremony</div>
+                <div class="couple-names">MAJOR YASIR RAZA</div>
+                <div class="date-box">TUESDAY, 10 NOVEMBER 2026 AT 5:30 PM</div>
+                <div class="venue-box">
+                    <h4>Garrison Officers Mess</h4>
+                    <p>Main Mall Road Near GPO Under Pass Rawalpindi.</p>
+                    <a href="https://maps.google.com/?q=Garrison+Officers+Mess+Mall+Road+Rawalpindi" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot"></i> Open Google Maps</a>
+                </div>
+                <p style="margin-top: 20px; font-style: italic; color: #555; font-size: 0.9rem;">Awaiting Eyes: All Sisters, Cousins & Friends</p>
             </div>
         </div>
-    </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-4xl mx-auto px-4 py-8 space-y-12">
-
-        <!-- Welcome Banner Header -->
-        <section class="text-center py-10 px-6 rounded-3xl bg-gradient-to-b from-amber-50/90 via-white to-stone-50 border border-amber-200/60 shadow-md relative overflow-hidden">
-            <div class="arabic-bismillah text-2xl sm:text-3xl text-amber-800 mb-2 font-semibold">
-                بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+        <!-- CARD 2: BARAAT -->
+        <div id="card-baraat" class="wedding-card theme-baraat animated-card">
+            <div class="card-inner">
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="hosts">Mr. & Mrs. Mulazim Hussain</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">We invite you to celebrate the Baraat of</p>
+                <div class="event-title">Major Yasir & D/o Muhammad Taj Sabir</div>
+                <div class="date-box">WEDNESDAY, 11 NOVEMBER 2026</div>
+                <div class="details-list">
+                    <p><strong>Sehra Bandi:</strong> AT 10:30 AM</p>
+                    <p><strong>Departure of Barat:</strong> AT 11:30 AM</p>
+                </div>
+                <div class="venue-box">
+                    <h4>AT HOME</h4>
+                    <p>House # 279/6-F, Mohalla Kamalabad-3, Rawalpindi</p>
+                    <a href="https://maps.google.com/?q=House+279+6-F+Mohalla+Kamalabad-3+Rawalpindi" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot"></i> Open Google Maps</a>
+                </div>
+                <div style="margin-top: 25px; font-size: 0.85rem; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
+                    <strong>Looking Forward:</strong><br>
+                    Mr. & Mrs. Jawad Ali Qadir (0321-510871) | Mr. & Mrs. Jalil ur Rehman (0333-5905593) | Mr. & Mrs. Imran Ali Qadir (0333-5752376)
+                </div>
             </div>
-            <p class="text-[11px] uppercase tracking-widest text-amber-800/80 font-serif font-bold mb-3">In the Name of Allah, Most Gracious, Most Merciful</p>
+        </div>
+
+        <!-- CARD 3: WALIMA -->
+        <div id="card-walima" class="wedding-card theme-walima animated-card">
+            <div class="card-inner">
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="hosts">Mr. & Mrs. Mulazim Hussain</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">Please join us to celebrate the Walima of our beloved son:</p>
+                <div class="event-title">Major Yasir & D/o Muhammad Taj Sabir</div>
+                <div class="date-box">THURSDAY, 12 NOVEMBER 2026</div>
+                <div class="details-list">
+                    <p><strong>Reception:</strong> 12:30 PM</p>
+                    <p><strong>Lunch:</strong> 1:30 PM</p>
+                </div>
+                <div class="venue-box">
+                    <h4>Garrison Officers Mess</h4>
+                    <p>Main Mall Road Near GPO Under Pass Rawalpindi.</p>
+                    <a href="https://maps.google.com/?q=Garrison+Officers+Mess+Mall+Road+Rawalpindi" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot"></i> Open Google Maps</a>
+                </div>
+                <div style="margin-top: 25px; font-size: 0.85rem; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
+                    <strong>Looking Forward:</strong><br>
+                    Mr. Ghulam Qadir | Mr. & Mrs. Amir Wagas | Mr. & Mrs. Jalil ur Rehman (0333-5905593) | Mr. & Mrs. Imran Ali Qadir (0333-5752376) | Mr. & Mrs. Jawad Ali Qadir (0321-510871)<br>
+                    <strong>R.S.V.P: All Family</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- RSVP Database Form -->
+        <div class="rsvp-section">
+            <h3>Confirm Your Attendance (RSVP)</h3>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Please let us know which functions you will be attending.</p>
+            <form id="rsvpForm" class="rsvp-form" onsubmit="submitRSVP(event)">
+                <input type="text" id="rsvpName" placeholder="Your Full Name / Family Name" required>
+                <select id="rsvpEvent" required>
+                    <option value="">Select Function Attending</option>
+                    <option value="Mehandi">Mehandi Ceremony (Nov 10)</option>
+                    <option value="Baraat">Baraat (Nov 11)</option>
+                    <option value="Walima">Walima Reception (Nov 12)</option>
+                    <option value="All Functions">All 3 Functions</option>
+                </select>
+                <select id="rsvpStatus" required>
+                    <option value="Attending">Joyfully Attending</option>
+                    <option value="Not Attending">Unable to Attend (Sending Prayers)</option>
+                </select>
+                <textarea id="rsvpWishes" placeholder="Leave a sweet blessing or wish for the couple..." rows="2"></textarea>
+                <button type="submit" class="rsvp-submit">Send RSVP</button>
+            </form>
+            <div id="rsvpSuccess" style="display:none; color: green; font-weight: 600; margin-top: 15px;">Thank you! Your RSVP has been recorded successfully.</div>
+        </div>
+    </div>
+
+    <!-- Share Link Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeShareModal()">&times;</span>
+            <h3>Generate Guest Invitation Link</h3>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Select which events this specific guest is invited to:</p>
             
-            <p class="text-stone-600 font-serif italic text-sm sm:text-base max-w-xl mx-auto mb-4">
-                Mr. &amp; Mrs. Mulazim Hussain cordially invite you to celebrate the wedding festivities of their beloved son
-            </p>
-
-            <h1 class="text-4xl sm:text-6xl font-script text-stone-900 my-2">
-                Major Yasir
-            </h1>
-            <div class="text-lg sm:text-2xl font-serif text-amber-700 my-1 font-light">&amp;</div>
-            <h2 class="text-2xl sm:text-4xl font-serif text-stone-800 font-medium">
-                D/o Muhammad Taj Sabir
-            </h2>
-
-            <div class="mt-6 flex flex-wrap justify-center gap-3 text-xs font-serif text-stone-600">
-                <span class="bg-amber-100/70 text-amber-900 px-3 py-1.5 rounded-full border border-amber-300/60 font-semibold"><i class="fa-regular fa-calendar-check mr-1 text-amber-700"></i> 10, 11 &amp; 12 November 2026</span>
-                <span class="bg-amber-100/70 text-amber-900 px-3 py-1.5 rounded-full border border-amber-300/60 font-semibold"><i class="fa-solid fa-location-dot mr-1 text-amber-700"></i> Rawalpindi, Pakistan</span>
-            </div>
-
-            <!-- Quick Presets -->
-            <div class="mt-8 pt-6 border-t border-amber-200/40">
-                <p class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3">Filter Invited Functions:</p>
-                <div class="flex flex-wrap justify-center gap-2 text-xs">
-                    <button onclick="setPreset('all')" class="px-3 py-1 rounded-md bg-stone-200 hover:bg-amber-600 hover:text-white transition font-medium">All 3 Functions</button>
-                    <button onclick="setPreset('mehandi')" class="px-3 py-1 rounded-md bg-stone-200 hover:bg-emerald-600 hover:text-white transition font-medium">Mehandi Only</button>
-                    <button onclick="setPreset('baraat')" class="px-3 py-1 rounded-md bg-stone-200 hover:bg-amber-700 hover:text-white transition font-medium">Baraat Only</button>
-                    <button onclick="setPreset('walima')" class="px-3 py-1 rounded-md bg-stone-200 hover:bg-purple-600 hover:text-white transition font-medium">Walima Only</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dynamic Cards Container -->
-        <div id="events-container" class="space-y-12">
-
-            <!-- 1. MEHANDI CEREMONY CARD (Exact Card 2 Replica) -->
-            <article id="card-mehandi" class="event-card transition-all duration-500">
-                <div class="bg-[url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center rounded-3xl p-3 sm:p-6 card-shadow border-4 border-emerald-800/30">
-                    <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-10 border-2 border-emerald-700 text-center space-y-5 relative">
-                        
-                        <!-- Top Bismillah -->
-                        <div class="arabic-bismillah text-2xl text-emerald-900 font-bold">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-
-                        <!-- Parents Host -->
-                        <div class="space-y-1">
-                            <p class="text-xs uppercase tracking-widest text-emerald-800 font-serif font-bold">MR. &amp; MRS. MULAZIM HUSSAIN</p>
-                            <p class="text-sm font-serif italic text-stone-600">Join us to celebrate our</p>
-                        </div>
-
-                        <!-- Title -->
-                        <div>
-                            <h3 class="text-5xl sm:text-6xl font-script text-emerald-800 my-1">Mehandi ceremony</h3>
-                            <p class="text-xs uppercase tracking-widest text-emerald-700 font-serif font-bold mt-1">of</p>
-                            <h4 class="text-2xl sm:text-3xl font-serif text-stone-900 font-bold mt-2 tracking-wide">MAJOR YASIR RAZA</h4>
-                        </div>
-
-                        <!-- Date & Time Box -->
-                        <div class="border-y-2 border-emerald-700/60 py-3 max-w-sm mx-auto space-y-1">
-                            <p class="text-xs font-serif uppercase tracking-widest text-emerald-900 font-bold">NOVEMBER</p>
-                            <div class="flex items-center justify-center gap-4 text-emerald-800 font-serif">
-                                <span class="text-xs font-bold uppercase tracking-wider">TUESDAY</span>
-                                <span class="text-4xl font-serif font-extrabold text-stone-900 px-2">10</span>
-                                <span class="text-xs font-bold uppercase tracking-wider">AT 5:30 PM</span>
-                            </div>
-                            <p class="text-xs font-serif font-bold text-emerald-900">2026</p>
-                        </div>
-
-                        <!-- Venue Details -->
-                        <div class="space-y-1">
-                            <p class="text-xs font-serif italic text-stone-600">at</p>
-                            <h5 class="text-lg sm:text-xl font-serif font-bold text-stone-900 uppercase">GARRISON OFFICERS MESS</h5>
-                            <p class="text-xs sm:text-sm font-serif italic text-stone-700 max-w-md mx-auto">Main Mall Road Near GPO Under Pass Rawalpindi.</p>
-                        </div>
-
-                        <!-- Awaiting Eyes -->
-                        <div class="pt-2 border-t border-emerald-100">
-                            <p class="text-xs uppercase tracking-widest font-bold text-stone-900">AWAITING EYES</p>
-                            <p class="text-xs font-serif italic text-emerald-800 mt-0.5">All Sisters, Cousins &amp; Friends</p>
-                        </div>
-
-                        <!-- Interactive Buttons -->
-                        <div class="pt-3 flex flex-wrap justify-center gap-2 text-xs">
-                            <a href="https://maps.google.com/?q=Garrison+Officers+Mess+Mall+Road+Rawalpindi" target="_blank" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl font-semibold transition shadow flex items-center gap-1.5">
-                                <i class="fa-solid fa-map-location-dot"></i> Google Maps Directions
-                            </a>
-                            <button onclick="addToCalendar('Mehandi Ceremony - Major Yasir Raza', 'Garrison Officers Mess, Main Mall Road Rawalpindi', '2026-11-10T17:30:00')" class="px-4 py-2 bg-emerald-100 text-emerald-900 hover:bg-emerald-200 border border-emerald-300 rounded-xl font-semibold transition flex items-center gap-1.5">
-                                <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
-                            </button>
-                        </div>
-
-                        <!-- Countdown -->
-                        <div class="bg-emerald-900 text-white rounded-2xl p-3 text-center">
-                            <p class="text-[11px] uppercase tracking-widest text-emerald-200 font-semibold mb-1">Countdown to Mehandi</p>
-                            <div class="grid grid-cols-4 gap-2 max-w-xs mx-auto text-center" id="countdown-mehandi">
-                                <div class="bg-emerald-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif days">00</span><p class="text-[9px] uppercase text-emerald-200">Days</p></div>
-                                <div class="bg-emerald-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif hours">00</span><p class="text-[9px] uppercase text-emerald-200">Hours</p></div>
-                                <div class="bg-emerald-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif minutes">00</span><p class="text-[9px] uppercase text-emerald-200">Mins</p></div>
-                                <div class="bg-emerald-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif seconds">00</span><p class="text-[9px] uppercase text-emerald-200">Secs</p></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </article>
-
-            <!-- 2. BARAAT CARD (Exact Card 1 Replica) -->
-            <article id="card-baraat" class="event-card transition-all duration-500">
-                <div class="bg-[#fefcf7] rounded-3xl p-3 sm:p-6 card-shadow border-4 border-amber-800/30">
-                    <div class="bg-[#fffdf9] rounded-2xl p-6 sm:p-10 border-2 border-amber-700/60 text-center space-y-5 relative">
-                        
-                        <!-- Top Bismillah -->
-                        <div class="arabic-bismillah text-2xl text-amber-900 font-bold">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-
-                        <!-- Host & Invitation Text -->
-                        <div class="space-y-1">
-                            <p class="text-xs uppercase tracking-widest text-stone-800 font-serif font-bold">Mr. &amp; Mrs. Mulazim Hussain</p>
-                            <p class="text-sm font-serif italic text-stone-600">We invite you to celebrate the Baraat of</p>
-                        </div>
-
-                        <!-- Couple Names -->
-                        <div>
-                            <h3 class="text-5xl sm:text-6xl font-script text-amber-900 my-1">Major Yasir</h3>
-                            <p class="text-xl font-serif text-amber-800 my-1 font-light">&amp;</p>
-                            <h4 class="text-3xl sm:text-4xl font-script text-amber-900">D/o Muhammad Taj Sabir</h4>
-                        </div>
-
-                        <p class="text-xs font-serif italic text-stone-600">Join the occasion of their joyous commitment on</p>
-
-                        <!-- Date & Schedule Box -->
-                        <div class="space-y-3 max-w-md mx-auto">
-                            <div class="border-b-2 border-amber-800 pb-1">
-                                <p class="text-base sm:text-lg font-serif font-bold text-amber-900 uppercase underline decoration-amber-700">ON WEDNESDAY 11 NOVEMBER 2026</p>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-serif text-left">
-                                <div class="flex justify-between items-center p-2 rounded-lg bg-amber-50/80 border border-amber-200">
-                                    <span class="font-serif italic text-amber-900 font-bold">Sehra Bandi</span>
-                                    <span class="font-bold text-amber-900">AT 10:30 AM</span>
-                                </div>
-                                <div class="flex justify-between items-center p-2 rounded-lg bg-amber-50/80 border border-amber-200">
-                                    <span class="font-serif italic text-amber-900 font-bold">Departure of Barat</span>
-                                    <span class="font-bold text-amber-900">AT 11:30 AM</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Venue Details -->
-                        <div class="space-y-1 pt-2">
-                            <p class="text-xs font-serif font-bold uppercase text-amber-900 underline">AT HOME</p>
-                            <p class="text-sm sm:text-base font-serif font-bold text-stone-900 uppercase">HOUSE # 279/6-F, MOHALLA KAMALABAD-3, RAWALPINDI</p>
-                        </div>
-
-                        <!-- Looking Forward -->
-                        <div class="pt-3 border-t border-amber-200 space-y-1 max-w-md mx-auto">
-                            <p class="text-xs uppercase tracking-widest font-bold text-amber-900 underline">Looking Forward:</p>
-                            <div class="text-xs font-serif italic text-amber-900 space-y-1">
-                                <p><span class="font-bold">Mr. &amp; Mrs. Jawad Ali Qadir</span> <a href="tel:03215108751" class="not-italic ml-1 underline">0321-5108751</a></p>
-                                <p><span class="font-bold">Mr. &amp; Mrs. Jalil ur Rehman</span> <a href="tel:03335905593" class="not-italic ml-1 underline">0333-5905593</a></p>
-                                <p><span class="font-bold">Mr. &amp; Mrs. Imran Ali Qadir</span> <a href="tel:03335752376" class="not-italic ml-1 underline">0333-5752376</a></p>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Actions -->
-                        <div class="pt-3 flex flex-wrap justify-center gap-2 text-xs">
-                            <a href="https://maps.google.com/?q=Mohalla+Kamalabad+3+Rawalpindi" target="_blank" class="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-white rounded-xl font-semibold transition shadow flex items-center gap-1.5">
-                                <i class="fa-solid fa-map-location-dot"></i> Home Location Directions
-                            </a>
-                            <button onclick="addToCalendar('Baraat & Sehra Bandi - Major Yasir', 'House # 279/6-F, Mohalla Kamalabad-3, Rawalpindi', '2026-11-11T10:30:00')" class="px-4 py-2 bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300 rounded-xl font-semibold transition flex items-center gap-1.5">
-                                <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
-                            </button>
-                        </div>
-
-                        <!-- Countdown -->
-                        <div class="bg-amber-900 text-amber-50 rounded-2xl p-3 text-center">
-                            <p class="text-[11px] uppercase tracking-widest text-amber-200 font-semibold mb-1">Countdown to Baraat</p>
-                            <div class="grid grid-cols-4 gap-2 max-w-xs mx-auto text-center" id="countdown-baraat">
-                                <div class="bg-amber-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif days">00</span><p class="text-[9px] uppercase text-amber-200">Days</p></div>
-                                <div class="bg-amber-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif hours">00</span><p class="text-[9px] uppercase text-amber-200">Hours</p></div>
-                                <div class="bg-amber-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif minutes">00</span><p class="text-[9px] uppercase text-amber-200">Mins</p></div>
-                                <div class="bg-amber-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif seconds">00</span><p class="text-[9px] uppercase text-amber-200">Secs</p></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </article>
-
-            <!-- 3. WALIMA CARD (Exact Card 3 Replica) -->
-            <article id="card-walima" class="event-card transition-all duration-500">
-                <div class="bg-[url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center rounded-3xl p-3 sm:p-6 card-shadow border-4 border-purple-800/30">
-                    <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-10 border-2 border-purple-300 text-center space-y-5 relative">
-                        
-                        <!-- Top Bismillah -->
-                        <div class="arabic-bismillah text-2xl text-purple-900 font-bold">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-
-                        <!-- Host & Invitation -->
-                        <div class="space-y-1">
-                            <p class="text-xs uppercase tracking-widest text-stone-900 font-sans font-bold">Mr. &amp; Mrs. Mulazim Hussain</p>
-                            <p class="text-sm font-sans text-stone-700">Please join us to celebrate the Walima of our beloved son:</p>
-                        </div>
-
-                        <!-- Couple Names -->
-                        <div>
-                            <h3 class="text-5xl sm:text-6xl font-script text-purple-900 my-1">Major Yasir</h3>
-                            <p class="text-xl font-serif text-purple-700 my-1 font-light">&amp;</p>
-                            <h4 class="text-3xl sm:text-4xl font-script text-purple-900">D/o Muhammad Taj Sabir</h4>
-                        </div>
-
-                        <!-- Date & Schedule Box -->
-                        <div class="space-y-2 max-w-md mx-auto">
-                            <div class="border-b-2 border-purple-900 pb-1">
-                                <p class="text-base sm:text-lg font-sans font-bold text-purple-950 underline decoration-purple-800">On Thursday 12 November 2026</p>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 text-left font-sans py-1">
-                                <div class="flex justify-between items-center text-stone-900">
-                                    <span class="text-lg font-serif font-bold">Reception</span>
-                                    <span class="text-base font-bold">12:30 PM</span>
-                                </div>
-                                <div class="flex justify-between items-center text-stone-900">
-                                    <span class="text-lg font-serif font-bold">Lunch</span>
-                                    <span class="text-base font-bold">1:30 PM</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Venue Details -->
-                        <div class="space-y-1 pt-1">
-                            <p class="text-sm font-sans font-bold text-purple-900 underline">At Garrison Officers Mess</p>
-                            <p class="text-xs sm:text-sm font-sans font-medium text-stone-800">Main Mall Road Near GPO Under Pass Rawalpindi.</p>
-                        </div>
-
-                        <!-- Looking Forward & RSVP -->
-                        <div class="pt-3 border-t border-purple-200 max-w-lg mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-end text-left text-xs space-y-3 sm:space-y-0">
-                            <div class="space-y-1 font-sans text-stone-800">
-                                <p class="font-bold text-purple-950 underline">Looking Forward:</p>
-                                <p>Mr. Ghulam Qadir</p>
-                                <p>Mr. &amp; Mrs. Amir Waqas</p>
-                                <p>Mr. &amp; Mrs. Jalil ur Rehman <a href="tel:03335905593" class="underline font-bold">0333-5905593</a></p>
-                                <p>Mr. &amp; Mrs. Imran Ali Qadir <a href="tel:03335752376" class="underline font-bold">0333-5752376</a></p>
-                                <p>Mr. &amp; Mrs. Jawad Ali Qadir <a href="tel:03215108751" class="underline font-bold">0321-5108751</a></p>
-                            </div>
-                            <div class="text-right sm:text-right w-full sm:w-auto">
-                                <p class="font-bold text-purple-950 text-sm">R.S.V.P</p>
-                                <p class="font-sans text-stone-800 font-medium">All Family</p>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Actions -->
-                        <div class="pt-3 flex flex-wrap justify-center gap-2 text-xs">
-                            <a href="https://maps.google.com/?q=Garrison+Officers+Mess+Mall+Road+Rawalpindi" target="_blank" class="px-4 py-2 bg-purple-800 hover:bg-purple-900 text-white rounded-xl font-semibold transition shadow flex items-center gap-1.5">
-                                <i class="fa-solid fa-map-location-dot"></i> Google Maps Directions
-                            </a>
-                            <button onclick="addToCalendar('Walima Ceremony - Major Yasir', 'Garrison Officers Mess, Rawalpindi', '2026-11-12T12:30:00')" class="px-4 py-2 bg-purple-100 text-purple-900 hover:bg-purple-200 border border-purple-300 rounded-xl font-semibold transition flex items-center gap-1.5">
-                                <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
-                            </button>
-                        </div>
-
-                        <!-- Countdown -->
-                        <div class="bg-purple-900 text-purple-50 rounded-2xl p-3 text-center">
-                            <p class="text-[11px] uppercase tracking-widest text-purple-200 font-semibold mb-1">Countdown to Walima</p>
-                            <div class="grid grid-cols-4 gap-2 max-w-xs mx-auto text-center" id="countdown-walima">
-                                <div class="bg-purple-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif days">00</span><p class="text-[9px] uppercase text-purple-200">Days</p></div>
-                                <div class="bg-purple-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif hours">00</span><p class="text-[9px] uppercase text-purple-200">Hours</p></div>
-                                <div class="bg-purple-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif minutes">00</span><p class="text-[9px] uppercase text-purple-200">Mins</p></div>
-                                <div class="bg-purple-800 p-1.5 rounded-lg"><span class="text-lg font-bold font-serif seconds">00</span><p class="text-[9px] uppercase text-purple-200">Secs</p></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-        <!-- RSVP Form Section -->
-        <section id="rsvp" class="bg-white rounded-3xl p-6 sm:p-10 card-shadow border border-amber-200/80 relative">
-            <div class="max-w-2xl mx-auto space-y-6">
-                <div class="text-center space-y-1">
-                    <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">Join Us In Our Joy</span>
-                    <h3 class="text-3xl font-serif font-bold text-stone-900">RSVP Confirmation</h3>
-                    <p class="text-xs text-stone-500 font-serif">Please confirm your attendance so we can welcome you warmly.</p>
-                </div>
-
-                <form id="rsvpForm" onsubmit="submitRSVP(event)" class="space-y-4 text-sm">
-                    <div>
-                        <label class="block font-medium text-stone-700 mb-1">Your Full Name / Family Name *</label>
-                        <input type="text" id="rsvpGuestName" required placeholder="e.g. Mr. & Mrs. Ahmed Khan" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block font-medium text-stone-700 mb-1">Mobile / WhatsApp Number *</label>
-                        <input type="tel" required placeholder="03xx-xxxxxxx" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block font-medium text-stone-700 mb-2">Attending Events:</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-200 bg-stone-50 cursor-pointer hover:bg-emerald-50">
-                                <input type="checkbox" id="rsvp-m" checked class="rounded text-emerald-600 focus:ring-emerald-500">
-                                <span class="font-medium text-stone-800">Mehandi (10 Nov)</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-200 bg-stone-50 cursor-pointer hover:bg-amber-50">
-                                <input type="checkbox" id="rsvp-b" checked class="rounded text-amber-600 focus:ring-amber-500">
-                                <span class="font-medium text-stone-800">Baraat (11 Nov)</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-3 rounded-xl border border-stone-200 bg-stone-50 cursor-pointer hover:bg-purple-50">
-                                <input type="checkbox" id="rsvp-w" checked class="rounded text-purple-600 focus:ring-purple-500">
-                                <span class="font-medium text-stone-800">Walima (12 Nov)</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block font-medium text-stone-700 mb-1">Number of Guests</label>
-                            <select class="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                                <option>1 Person</option>
-                                <option selected>2 Persons</option>
-                                <option>3 Persons</option>
-                                <option>4 Persons</option>
-                                <option>5+ Family</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block font-medium text-stone-700 mb-1">Status</label>
-                            <select class="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                                <option>Joyfully Accepts</option>
-                                <option>Regretfully Declines</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> Submit RSVP Response
-                    </button>
-                </form>
-
-                <div id="rsvpSuccess" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center text-emerald-800 space-y-1">
-                    <i class="fa-solid fa-circle-check text-2xl text-emerald-600"></i>
-                    <p class="font-bold">Thank You for Your Confirmation!</p>
-                    <p class="text-xs text-stone-600">Your response has been saved. We look forward to seeing you!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Guest Wish Wall / Blessings Section -->
-        <section class="bg-gradient-to-br from-amber-50 to-stone-100 rounded-3xl p-6 sm:p-10 card-shadow border border-amber-200/60">
-            <div class="max-w-2xl mx-auto space-y-6">
-                <div class="text-center space-y-1">
-                    <span class="text-xs uppercase tracking-widest text-amber-800 font-bold">Blessings &amp; Prayers</span>
-                    <h3 class="text-3xl font-serif font-bold text-stone-900">Send Your Wishes</h3>
-                    <p class="text-xs text-stone-500 font-serif">Leave a prayer or congratulatory message for Major Yasir &amp; Bride.</p>
-                </div>
-
-                <form onsubmit="postWish(event)" class="space-y-3">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <input id="wishName" type="text" placeholder="Your Name" required class="px-4 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                        <input id="wishRelation" type="text" placeholder="Relation (e.g. Friend, Cousin)" class="px-4 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-                    <textarea id="wishText" rows="3" placeholder="Write your warm wishes..." required class="w-full px-4 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
-                    <button type="submit" class="bg-stone-900 hover:bg-stone-800 text-white font-semibold px-5 py-2 rounded-xl text-xs shadow transition">
-                        Post Blessing
-                    </button>
-                </form>
-
-                <div id="wishesFeed" class="space-y-3 pt-4 border-t border-amber-200/60 max-h-80 overflow-y-auto">
-                    <div class="bg-white p-4 rounded-2xl border border-amber-100 shadow-sm space-y-1">
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="font-bold text-amber-900">Lt. Col. Usman &amp; Family</span>
-                            <span class="text-stone-400">Just now</span>
-                        </div>
-                        <p class="text-xs text-stone-700 italic">"BarakAllah lakuma wa baraka 'alaykuma wa jama'a baynakuma fii khayr. Heartiest congratulations to Major Yasir!"</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-400 py-8 px-4 text-center text-xs border-t border-stone-800 space-y-1">
-        <p class="font-serif text-amber-400 font-medium">Major Yasir &amp; D/o Muhammad Taj Sabir Wedding</p>
-        <p>10th – 12th November 2026 • Garrison Officers Mess &amp; Kamalabad Rawalpindi</p>
-    </footer>
-
-    <!-- Custom Share Link Generator Modal -->
-    <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl relative">
-            <button onclick="closeShareModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="text-center space-y-1">
-                <i class="fa-solid fa-share-nodes text-3xl text-amber-600 mb-1"></i>
-                <h4 class="text-xl font-serif font-bold text-stone-900">Generate Guest Invitation Link</h4>
-                <p class="text-xs text-stone-500">Select which functions to include for this specific guest.</p>
-            </div>
-
-            <!-- Optional Guest Name -->
-            <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">Guest / Family Name (Optional):</label>
-                <input type="text" id="shareGuestName" placeholder="e.g. Uncle Jawad & Family" oninput="updateSharePreview()" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
-            </div>
-
-            <!-- Modal Event Options Selection -->
-            <div class="space-y-2 bg-stone-50 p-3 rounded-2xl border border-stone-200 text-xs">
-                <span class="font-bold text-stone-700 block mb-1">Functions Included:</span>
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" id="share-m" checked onchange="updateSharePreview()" class="rounded text-amber-600">
-                    <span class="font-medium text-emerald-800">Mehandi (Tue 10 Nov @ 5:30 PM)</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" id="share-b" checked onchange="updateSharePreview()" class="rounded text-amber-600">
-                    <span class="font-medium text-amber-900">Baraat (Wed 11 Nov @ 10:30 AM)</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" id="share-w" checked onchange="updateSharePreview()" class="rounded text-amber-600">
-                    <span class="font-medium text-purple-900">Walima (Thu 12 Nov @ 12:30 PM)</span>
-                </label>
-            </div>
-
-            <!-- Message Preview -->
-            <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">WhatsApp Message Preview:</label>
-                <textarea id="shareMsgText" rows="5" readonly class="w-full text-xs p-3 rounded-xl bg-amber-50/50 border border-amber-200 text-stone-700 font-mono"></textarea>
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex flex-col sm:flex-row gap-2">
-                <button onclick="copyShareLink()" class="flex-1 bg-stone-800 hover:bg-stone-900 text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-copy"></i> Copy Message &amp; Link
-                </button>
-                <button onclick="openWhatsApp()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Send on WhatsApp
-                </button>
-            </div>
+            <input type="text" id="guestNameInput" placeholder="Guest Name (e.g. Uncle Jawad)" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
             
-            <button onclick="previewGuestView()" class="w-full py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold rounded-xl transition border border-amber-300">
-                <i class="fa-solid fa-eye mr-1"></i> Test Guest View Now
-            </button>
+            <div style="margin: 10px 0; font-size: 0.9rem;">
+                <label><input type="checkbox" id="chkMehandi" checked> Mehandi (Nov 10)</label><br>
+                <label><input type="checkbox" id="chkBaraat" checked> Baraat (Nov 11)</label><br>
+                <label><input type="checkbox" id="chkWalima" checked> Walima (Nov 12)</label>
+            </div>
+
+            <button onclick="generateCustomLink()" style="width:100%; background:var(--baraat-red); color:white; border:none; padding:10px; border-radius:6px; font-weight:600; cursor:pointer; margin-top:10px;">Copy WhatsApp Invite & Link</button>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
-        // Visible Events State
-        let activeEvents = {
-            mehandi: true,
-            baraat: true,
-            walima: true
-        };
-
-        let customGuestName = "";
-
-        // Web Audio Synthesizer
-        let audioCtx = null;
-        let isPlaying = false;
-        let melodyInterval = null;
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3500);
-        }
-
-        function toggleAudio() {
-            const icon = document.getElementById('musicIcon');
-            if (!isPlaying) {
-                startAmbientMusic();
-                icon.className = "fa-solid fa-volume-high text-amber-700 animate-pulse";
-                isPlaying = true;
-                showToast("Soft background music started");
-            } else {
-                stopAmbientMusic();
-                icon.className = "fa-solid fa-music text-lg";
-                isPlaying = false;
-                showToast("Music paused");
-            }
-        }
-
-        function startAmbientMusic() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
-            let noteIdx = 0;
-
-            melodyInterval = setInterval(() => {
-                if (!isPlaying) return;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(notes[noteIdx % notes.length], audioCtx.currentTime);
-
-                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.4);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.2);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 2.3);
-
-                noteIdx = Math.floor(Math.random() * notes.length);
-            }, 1800);
-        }
-
-        function stopAmbientMusic() {
-            if (melodyInterval) clearInterval(melodyInterval);
-        }
-
-        // Toggle Event Visibility Logic
-        function toggleEvent(eventName) {
-            activeEvents[eventName] = !activeEvents[eventName];
-            renderEventVisibility();
-        }
-
-        function setPreset(preset) {
-            if (preset === 'all') {
-                activeEvents = { mehandi: true, baraat: true, walima: true };
-            } else if (preset === 'mehandi') {
-                activeEvents = { mehandi: true, baraat: false, walima: false };
-            } else if (preset === 'baraat') {
-                activeEvents = { mehandi: false, baraat: true, walima: false };
-            } else if (preset === 'walima') {
-                activeEvents = { mehandi: false, baraat: false, walima: true };
-            }
-            renderEventVisibility();
-        }
-
-        function renderEventVisibility() {
-            ['mehandi', 'baraat', 'walima'].forEach(ev => {
-                const card = document.getElementById(`card-${ev}`);
-                const btn = document.getElementById(`filter-${ev}`);
-                const check = document.getElementById(`check-${ev}`);
-
-                if (activeEvents[ev]) {
-                    if (card) card.style.display = 'block';
-                    if (btn) {
-                        btn.classList.add('opacity-100');
-                        btn.classList.remove('opacity-40', 'line-through');
-                    }
-                    if (check) check.style.display = 'inline-block';
-                } else {
-                    if (card) card.style.display = 'none';
-                    if (btn) {
-                        btn.classList.add('opacity-40', 'line-through');
-                    }
-                    if (check) check.style.display = 'none';
-                }
-            });
-
-            // Synchronize RSVP Form Checkboxes
-            const rM = document.getElementById('rsvp-m');
-            const rB = document.getElementById('rsvp-b');
-            const rW = document.getElementById('rsvp-w');
-            if (rM) rM.checked = activeEvents.mehandi;
-            if (rB) rB.checked = activeEvents.baraat;
-            if (rW) rW.checked = activeEvents.walima;
-
-            updateURLParams();
-        }
-
-        function updateURLParams() {
-            const params = [];
-            if (activeEvents.mehandi) params.push('m=1');
-            if (activeEvents.baraat) params.push('b=1');
-            if (activeEvents.walima) params.push('w=1');
-            if (customGuestName) params.push(`guest=${encodeURIComponent(customGuestName)}`);
-
-            const newHash = '#' + params.join('&');
+        // Parse URL hash parameters to customize view for each guest
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            const params = new URLSearchParams(hash);
             
-            // Safely update history/hash without throwing in blob/sandboxed environments
-            try {
-                if (window.location.hash !== newHash) {
-                    window.history.replaceState(null, '', newHash);
-                }
-            } catch (e) {
-                // Fallback for sandboxed frame environment
-                try {
-                    window.location.hash = newHash;
-                } catch (err) {
-                    console.warn("URL history update prevented by sandboxed frame environment:", err);
-                }
-            }
-        }
+            const guest = params.get('guest');
+            const m = params.get('m');
+            const b = params.get('b');
+            const w = params.get('w');
 
-        function loadURLParams() {
-            let hashStr = window.location.hash.substring(1);
+            if (guest) {
+                document.getElementById('welcomeGuestTitle').innerText = `Warm Greetings, ${decodeURIComponent(guest)}!`;
+            }
+
+            // If specific event filters are passed in URL
+            if (params.toString()) {
+                const cardM = document.getElementById('card-mehandi');
+                const cardB = document.getElementById('card-baraat');
+                const cardW = document.getElementById('card-walima');
+
+                if (cardM) cardM.style.display = (m === '1') ? 'block' : 'none';
+                if (cardB) cardB.style.display = (b === '1') ? 'block' : 'none';
+                if (cardW) cardW.style.display = (w === '1') ? 'block' : 'none';
+            }
+        });
+
+        function openShareModal() { document.getElementById('shareModal').style.display = 'flex'; }
+        function closeShareModal() { document.getElementById('shareModal').style.display = 'none'; }
+
+        function generateCustomLink() {
+            const name = document.getElementById('guestNameInput').value.trim() || 'Guest';
+            const m = document.getElementById('chkMehandi').checked ? '1' : '0';
+            const b = document.getElementById('chkBaraat').checked ? '1' : '0';
+            const w = document.getElementById('chkWalima').checked ? '1' : '0';
+
+            const baseUrl = window.location.href.split('#')[0];
+            const customUrl = `${baseUrl}#guest=${encodeURIComponent(name)}&m=${m}&b=${b}&w=${w}`;
+
+            const whatsappText = `﷽\n*Mr. & Mrs. Mulazim Hussain* cordially invite you, *${name}*, to celebrate the wedding festivities of *Major Yasir & D/o Muhammad Taj Sabir*.\n\n💌 *Tap here to view your personalized invitation cards & venue maps:*\n${customUrl}`;
             
-            // Fallback check standard query string if hash is empty
-            if (!hashStr && window.location.search) {
-                hashStr = window.location.search.substring(1);
-            }
-
-            if (hashStr) {
-                const params = new URLSearchParams(hashStr);
-                
-                if (params.has('m') || params.has('b') || params.has('w')) {
-                    activeEvents.mehandi = params.get('m') === '1';
-                    activeEvents.baraat = params.get('b') === '1';
-                    activeEvents.walima = params.get('w') === '1';
-                }
-
-                // Display Banner for guest
-                const guestBanner = document.getElementById('customGuestBanner');
-                const guestText = document.getElementById('customGuestText');
-                if (params.has('guest')) {
-                    customGuestName = params.get('guest');
-                    if (guestText) {
-                        guestText.innerHTML = `<i class="fa-solid fa-envelope-open-text text-amber-300 mr-1.5"></i> Special Invitation for <strong>${customGuestName}</strong>`;
-                    }
-                    const rsvpInput = document.getElementById('rsvpGuestName');
-                    if (rsvpInput) rsvpInput.value = customGuestName;
-                }
-                if (guestBanner) guestBanner.classList.remove('hidden');
-            }
-            renderEventVisibility();
-        }
-
-        function showAllEventsToggle() {
-            setPreset('all');
-            showToast("Showing all 3 wedding ceremonies!");
-        }
-
-        // Listen for hash changes
-        window.addEventListener('hashchange', loadURLParams);
-
-        // Share Modal Logic
-        function openShareModal() {
-            document.getElementById('shareModal').classList.remove('hidden');
-            document.getElementById('share-m').checked = activeEvents.mehandi;
-            document.getElementById('share-b').checked = activeEvents.baraat;
-            document.getElementById('share-w').checked = activeEvents.walima;
-            updateSharePreview();
-        }
-
-        function closeShareModal() {
-            document.getElementById('shareModal').classList.add('hidden');
-        }
-
-        function updateSharePreview() {
-            const m = document.getElementById('share-m').checked;
-            const b = document.getElementById('share-b').checked;
-            const w = document.getElementById('share-w').checked;
-            const gName = document.getElementById('shareGuestName').value.trim();
-
-            let query = [];
-            if (m) query.push('m=1');
-            if (b) query.push('b=1');
-            if (w) query.push('w=1');
-            if (gName) query.push(`guest=${encodeURIComponent(gName)}`);
-
-            // Cleanly determine base URL without appending query/hash directly onto non-file paths
-            let rawUrl = window.location.href.split('#')[0].split('?')[0];
-            
-            // Ensure URL points to index.html if ending on a raw directory ID to prevent server 404s
-            if (!rawUrl.endsWith('.html') && !rawUrl.endsWith('/')) {
-                rawUrl += '/';
-            }
-            
-            const shareUrl = `${rawUrl}#${query.join('&')}`;
-
-            let functionsList = [];
-            if (m) functionsList.push('• Mehandi Ceremony (Tue 10 Nov @ 5:30 PM)');
-            if (b) functionsList.push('• Baraat & Sehra Bandi (Wed 11 Nov @ 10:30 AM)');
-            if (w) functionsList.push('• Walima Reception (Thu 12 Nov @ 12:30 PM)');
-
-            const salutation = gName ? `Dear ${gName},\n\n` : '';
-            const msg = `${salutation}You are cordially invited to celebrate the Wedding Ceremony of Major Yasir & D/o Muhammad Taj Sabir!\n\nFunctions Invited:\n${functionsList.join('\n')}\n\nView Your Digital Invitation & Location Map:\n${shareUrl}`;
-
-            document.getElementById('shareMsgText').value = msg;
-        }
-
-        function copyShareLinkOnly() {
-            const m = document.getElementById('share-m').checked;
-            const b = document.getElementById('share-b').checked;
-            const w = document.getElementById('share-w').checked;
-            const gName = document.getElementById('shareGuestName').value.trim();
-
-            let query = [];
-            if (m) query.push('m=1');
-            if (b) query.push('b=1');
-            if (w) query.push('w=1');
-            if (gName) query.push(`guest=${encodeURIComponent(gName)}`);
-
-            let rawUrl = window.location.href.split('#')[0].split('?')[0];
-            if (!rawUrl.endsWith('.html') && !rawUrl.endsWith('/')) {
-                rawUrl += '/';
-            }
-            const shareUrl = `${rawUrl}#${query.join('&')}`;
-
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    showToast('Invitation URL copied to clipboard!');
-                }).catch(() => fallbackCopy(shareUrl));
-            } else {
-                fallbackCopy(shareUrl);
-            }
-        }
-
-        function copyShareLink() {
-            const text = document.getElementById('shareMsgText').value;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast('Copied invitation message & link!');
-                }).catch(() => fallbackCopy(text));
-            } else {
-                fallbackCopy(text);
-            }
-        }
-
-        function fallbackCopy(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            showToast('Copied invitation message & link!');
-        }
-
-        function openWhatsApp() {
-            const text = encodeURIComponent(document.getElementById('shareMsgText').value);
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-        }
-
-        function previewGuestView() {
+            navigator.clipboard.writeText(whatsappText);
+            alert(`Invitation message for "${name}" copied to clipboard! You can now paste it directly into WhatsApp.`);
             closeShareModal();
-            activeEvents.mehandi = document.getElementById('share-m').checked;
-            activeEvents.baraat = document.getElementById('share-b').checked;
-            activeEvents.walima = document.getElementById('share-w').checked;
-            customGuestName = document.getElementById('shareGuestName').value.trim();
-            renderEventVisibility();
-            showToast("Showing Guest View Preview");
         }
 
-        // Add to Calendar Integration (.ics)
-        function addToCalendar(title, location, startDateStr) {
-            const startDate = new Date(startDateStr);
-            const endDate = new Date(startDate.getTime() + (3 * 60 * 60 * 1000));
-
-            const formatDate = (date) => date.toISOString().replace(/-|:|\.\d+/g, '');
-
-            const icsData = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'BEGIN:VEVENT',
-                `SUMMARY:${title}`,
-                `LOCATION:${location}`,
-                `DTSTART:${formatDate(startDate)}`,
-                `DTEND:${formatDate(endDate)}`,
-                'DESCRIPTION:Wedding Ceremony of Major Yasir & D/o Muhammad Taj Sabir.',
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\n');
-
-            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.setAttribute('download', `${title.replace(/\s+/g, '_')}.ics`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast("Calendar event downloaded!");
-        }
-
-        // RSVP Form Submission
+        // Database connection for RSVPs (Google Sheets integration)
         function submitRSVP(e) {
             e.preventDefault();
-            document.getElementById('rsvpForm').reset();
-            document.getElementById('rsvpSuccess').classList.remove('hidden');
-            showToast("RSVP successfully submitted!");
-            setTimeout(() => {
-                document.getElementById('rsvpSuccess').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
+            const name = document.getElementById('rsvpName').value;
+            const event = document.getElementById('rsvpEvent').value;
+            const status = document.getElementById('rsvpStatus').value;
+            const wishes = document.getElementById('rsvpWishes').value;
 
-        // Wish Wall Logic
-        function postWish(e) {
-            e.preventDefault();
-            const name = document.getElementById('wishName').value;
-            const relation = document.getElementById('wishRelation').value;
-            const text = document.getElementById('wishText').value;
+            // Optional: You can paste your free Google Apps Script Web App URL below to store entries in Google Sheets automatically
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyYtOrGh-Z3X1WT1kfvCa7uD6NncBoyAxHEPAaGd3Daro9C4x1xOvEcGAcJFyS7duM/exec'; 
 
-            const feed = document.getElementById('wishesFeed');
-            const card = document.createElement('div');
-            card.className = "bg-white p-4 rounded-2xl border border-amber-100 shadow-sm space-y-1 transition-all duration-300";
-            card.innerHTML = `
-                <div class="flex justify-between items-center text-xs">
-                    <span class="font-bold text-amber-900">${name} ${relation ? `(${relation})` : ''}</span>
-                    <span class="text-stone-400">Just now</span>
-                </div>
-                <p class="text-xs text-stone-700 italic">"${text}"</p>
-            `;
-
-            feed.prepend(card);
-            document.getElementById('wishName').value = '';
-            document.getElementById('wishRelation').value = '';
-            document.getElementById('wishText').value = '';
-            showToast("Blessing posted!");
-        }
-
-        // Event Countdowns
-        function startCountdowns() {
-            const events = [
-                { id: 'countdown-mehandi', date: new Date('2026-11-10T17:30:00') },
-                { id: 'countdown-baraat', date: new Date('2026-11-11T10:30:00') },
-                { id: 'countdown-walima', date: new Date('2026-11-12T12:30:00') }
-            ];
-
-            function update() {
-                const now = new Date().getTime();
-
-                events.forEach(ev => {
-                    const diff = ev.date.getTime() - now;
-                    const container = document.getElementById(ev.id);
-                    if (!container) return;
-
-                    if (diff <= 0) {
-                        container.innerHTML = `<span class="text-xs font-bold text-amber-200 col-span-4">Event in progress or concluded!</span>`;
-                        return;
-                    }
-
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-                    container.querySelector('.days').innerText = String(days).padStart(2, '0');
-                    container.querySelector('.hours').innerText = String(hours).padStart(2, '0');
-                    container.querySelector('.minutes').innerText = String(mins).padStart(2, '0');
-                    container.querySelector('.seconds').innerText = String(secs).padStart(2, '0');
-                });
+            if(scriptURL) {
+                fetch(scriptURL, { method: 'POST', body: JSON.stringify({name, event, status, wishes}) })
+                    .then(response => showSuccess())
+                    .catch(error => alert('Error submitting RSVP. Please try again.'));
+            } else {
+                // Fallback simulation success message
+                showSuccess();
             }
-
-            update();
-            setInterval(update, 1000);
         }
 
-        // Initialize on Load
-        window.onload = function() {
-            loadURLParams();
-            startCountdowns();
-        };
+        function showSuccess() {
+            document.getElementById('rsvpForm').style.display = 'none';
+            document.getElementById('rsvpSuccess').style.display = 'block';
+        }
     </script>
 </body>
 </html>
