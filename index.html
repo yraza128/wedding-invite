@@ -9,50 +9,59 @@
     <style>
         :root {
             --mehandi-green: #1b4332;
-            --mehandi-gold: #d4af37;
             --baraat-red: #5c1d24;
             --baraat-gold: #c5a059;
             --walima-purple: #3c2a4d;
-            --walima-gold: #b39ddb;
             --bg-cream: #faf5f5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-cream); color: #333; line-height: 1.6; overflow-x: hidden; }
 
-        /* --- STAGE 1: ENVELOPE OPENING ANIMATION --- */
-        #envelope-screen {
+        /* --- STAGE 1: ENVELOPE UNFOLDING ANIMATION --- */
+        #envelope-wrapper {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #f9f0f0, #e8d7d7); z-index: 9999;
-            display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease;
+            background: linear-gradient(135deg, #f7ecec, #e2d0d0); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 1s ease, transform 1s ease;
         }
-        #envelope-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #envelope-wrapper.opened { opacity: 0; transform: scale(1.1); pointer-events: none; }
 
-        .envelope-container {
-            width: 90%; max-width: 420px; background: #fceeee; border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); text-align: center; padding: 40px 20px;
-            border: 2px solid #e0c2c2; position: relative; animation: floatSlow 4s ease-in-out infinite;
+        .envelope {
+            width: 340px; height: 460px; background: #f3dfdf; border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(92, 29, 36, 0.2); position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 2px solid #d8bcbc; overflow: hidden; transition: transform 0.8s ease;
         }
-        .envelope-flap {
-            font-family: 'Cinzel', serif; font-size: 1.1rem; color: #5c1d24; margin-bottom: 25px;
-            letter-spacing: 1px; text-transform: uppercase;
+
+        /* Envelope Flap */
+        .env-flap {
+            position: absolute; top: 0; left: 0; width: 100%; height: 200px;
+            background: #ecd5d5; clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top; transition: transform 0.8s ease; z-index: 3;
+            border-bottom: 2px solid #d8bcbc;
         }
+        .envelope.open-flap .env-flap { transform: rotateX(180deg); z-index: 0; }
+
+        /* Wax Seal Button */
         .wax-seal {
-            width: 90px; height: 90px; background: radial-gradient(circle, #d4af37 0%, #aa8220 100%);
-            border-radius: 50%; margin: 20px auto; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 6px 20px rgba(170,130,32,0.4); cursor: pointer; border: 4px dashed #fff;
-            font-family: 'Cinzel', serif; font-weight: 700; color: #fff; font-size: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative;
+            width: 85px; height: 85px; background: radial-gradient(circle, #dfbe55 0%, #a47d1b 100%);
+            border-radius: 50%; z-index: 5; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 6px 15px rgba(164,125,27,0.5); cursor: pointer; border: 4px dashed #fff;
+            font-family: 'Cinzel', serif; font-weight: 700; color: #fff; font-size: 1.4rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; top: 40px;
         }
-        .wax-seal:hover { transform: scale(1.1); box-shadow: 0 10px 25px rgba(170,130,32,0.6); }
-        .open-instruction { font-style: italic; color: #666; font-size: 0.9rem; margin-top: 15px; animation: pulseText 2s infinite; }
+        .wax-seal:hover { transform: scale(1.08); }
 
-        @keyframes pulseText { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-        @keyframes floatSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .env-text {
+            position: absolute; bottom: 40px; font-family: 'Cinzel', serif; font-size: 1rem;
+            color: var(--baraat-red); text-align: center; z-index: 2; padding: 0 20px;
+        }
+        .env-text span { display: block; font-size: 0.8rem; font-style: italic; color: #666; margin-top: 5px; }
 
-        /* --- STAGE 2: MAIN INVITATION CONTENT --- */
-        #main-content { opacity: 0; transition: opacity 1s ease; display: none; }
-        #main-content.visible { opacity: 1; display: block; }
+        /* --- STAGE 2: MAIN INVITATION SITE --- */
+        #main-content { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; display: none; }
+        #main-content.visible { opacity: 1; transform: translateY(0); display: block; }
 
         .top-bar {
             background: #111; color: white; padding: 12px 20px; text-align: center;
@@ -69,19 +78,18 @@
 
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-        /* Guest Welcome Banner */
         .guest-banner {
             background: linear-gradient(135deg, #fff, #f8f1f1); border: 2px solid var(--baraat-gold);
             border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: fadeIn 1s ease-out;
         }
         .guest-banner h2 { font-family: 'Cinzel', serif; color: var(--baraat-red); font-size: 1.4rem; margin-bottom: 5px; }
 
-        /* Wedding Cards */
+        /* Card Slide-up / Flip Animation */
         .wedding-card {
-            background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #fff; border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.12);
             margin-bottom: 40px; overflow: hidden; border: 8px solid #fff; position: relative;
-            transform: translateY(30px); opacity: 0; transition: all 0.8s ease;
+            transform: translateY(50px); opacity: 0; transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .wedding-card.reveal { transform: translateY(0); opacity: 1; }
         .card-inner { padding: 40px 30px; text-align: center; }
@@ -134,19 +142,21 @@
 </head>
 <body>
 
-    <!-- STAGE 1: INTERACTIVE ENVELOPE OPENING -->
-    <div id="envelope-screen">
-        <div class="envelope-container">
-            <div class="envelope-flap">Wedding Invitation</div>
-            <p style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #444; margin-bottom: 10px;">Major Yasir & Family</p>
-            <div class="wax-seal" onclick="openEnvelope()">
+    <!-- STAGE 1: ENVELOPE FLAP & WAX SEAL ANIMATION -->
+    <div id="envelope-wrapper">
+        <div class="envelope" id="envelopeBox">
+            <div class="env-flap"></div>
+            <div class="wax-seal" onclick="triggerOpenAnimation()">
                 <i class="fa-solid fa-ring"></i>
             </div>
-            <div class="open-instruction">Tap the wax seal to open your invite ✨</div>
+            <div class="env-text">
+                Major Yasir & Family
+                <span>Tap the wax seal to unfold invite ✨</span>
+            </div>
         </div>
     </div>
 
-    <!-- STAGE 2: MAIN INVITATION WEBSITE -->
+    <!-- STAGE 2: MAIN INVITATION SITE -->
     <div id="main-content">
         <div class="top-bar">
             <h1>Major Yasir's Wedding Portal</h1>
@@ -270,13 +280,20 @@
     </div>
 
     <script>
-        // Envelope Opening Animation Trigger
-        function openEnvelope() {
-            const envelopeScreen = document.getElementById('envelope-screen');
+        // Exact Video Animation Sequence
+        function triggerOpenAnimation() {
+            const envelopeBox = document.getElementById('envelopeBox');
+            const wrapper = document.getElementById('envelope-wrapper');
             const mainContent = document.getElementById('main-content');
-            
-            envelopeScreen.classList.add('hidden');
-            mainContent.classList.add('visible');
+
+            // 1. Open envelope flap
+            envelopeBox.classList.add('open-flap');
+
+            // 2. Fade out wrapper and slide in cards after flap opens
+            setTimeout(() => {
+                wrapper.classList.add('opened');
+                mainContent.classList.add('visible');
+            }, 700);
         }
 
         // Parse URL Hash Parameters for Guest Personalization & Event Filtering
@@ -324,7 +341,7 @@
             closeShareModal();
         }
 
-        // Database RSVP Submission (Connects to Google Sheets Web App)
+        // Database RSVP Submission (Google Sheets Web App)
         function submitRSVP(e) {
             e.preventDefault();
             const name = document.getElementById('rsvpName').value;
@@ -332,8 +349,7 @@
             const status = document.getElementById('rsvpStatus').value;
             const wishes = document.getElementById('rsvpWishes').value;
 
-            // Paste your deployed Google Apps Script Web App URL below:
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyYtOrGh-Z3X1WT1kfvCa7uD6NncBoyAxHEPAaGd3Daro9C4x1xOvEcGAcJFyS7duM/exec'; 
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyYtOrGh-Z3X1WT1kfvCa7uD6NncBoyAxHEPAaGd3Daro9C4x1xOvEcGAcJFyS7duM/exec'; // Paste your Google Apps Script Web App URL here if configured
 
             if(scriptURL) {
                 fetch(scriptURL, { method: 'POST', body: JSON.stringify({name, event, status, wishes}) })
