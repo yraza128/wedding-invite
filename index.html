@@ -7,7 +7,8 @@
 
 <!-- WhatsApp / social link preview. Upload a nice 1200x630 image and put its full URL below -->
 <meta property="og:title" content="💌 You are invited – Wedding of Major Yasir Raza">
-<meta property="og:description" content="Tap to open your personal digital invitation card.">
+<meta property="og:description" content="Mr. &amp; Mrs. Mulazim Hussain invite you · Mehandi 10 Nov · Baraat 11 Nov · Walima 12 Nov 2026. Tap to open your invitation.">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta property="og:image" content="">
 <meta name="theme-color" content="#2a0b12">
@@ -377,7 +378,8 @@ footer i{color:#e0566b;cursor:pointer}
     <label><input type="checkbox" id="gM" checked> Mehandi (Nov 10)</label>
     <label><input type="checkbox" id="gB" checked> Baraat (Nov 11)</label>
     <label><input type="checkbox" id="gW" checked> Walima (Nov 12)</label>
-    <button class="go" id="gCopy">Copy WhatsApp Message</button>
+    <label style="margin-top:8px"><input type="checkbox" id="gGreet"> Add a one-line greeting above the link</label>
+    <button class="go" id="gCopy">Copy Invitation Link</button>
     <button class="go wa" id="gSend">Send Directly on WhatsApp</button>
     <small id="gPreview"></small>
   </div>
@@ -537,7 +539,8 @@ function buildLink(){
   let e = ''; if ($('#gM').checked) e+='m'; if ($('#gB').checked) e+='b'; if ($('#gW').checked) e+='w';
   const base = location.href.split('#')[0];
   const link = `${base}#g=${encodeURIComponent(name)}&e=${e||'mbw'}`;
-  const msg = `﷽\n*Mr. & Mrs. Mulazim Hussain* cordially invite *${name}* to the wedding festivities of *Major Yasir Raza*.\n\n💌 Tap to open your personal invitation:\n${link}`;
+  // Default: send ONLY the link, so WhatsApp shows it as one big invitation card (image + title) that opens with a single tap.
+  const msg = $('#gGreet').checked ? `﷽ ${name}, you are invited 💌\n${link}` : link;
   return {link,msg};
 }
 $('#gCopy').onclick = () => { const {msg}=buildLink(); navigator.clipboard.writeText(msg).then(()=>{ $('#gPreview').textContent='Copied! Paste it into WhatsApp.'; }); };
