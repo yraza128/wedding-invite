@@ -18,12 +18,12 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-cream); color: #333; line-height: 1.6; overflow-x: hidden; }
 
-        /* --- STAGE 1: 3D ENVELOPE SCENE --- */
+        /* --- STAGE 1: ENVELOPE & LETTER SLIDE-OUT SCENE --- */
         #envelope-wrapper {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: linear-gradient(135deg, #f7ecec, #e2d0d0); z-index: 9999;
             display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         #envelope-wrapper.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -32,7 +32,7 @@
         .envelope {
             width: 100%; height: 100%; background: #f3dfdf; border-radius: 12px;
             box-shadow: 0 25px 60px rgba(92, 29, 36, 0.3); position: relative;
-            border: 2px solid #d8bcbc; overflow: hidden; transform-style: preserve-3d;
+            border: 2px solid #d8bcbc; overflow: visible;
         }
 
         /* Envelope Flap with 3D Fold Animation */
@@ -40,65 +40,54 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 210px;
             background: #ecd5d5; clip-path: polygon(0 0, 50% 100%, 100% 0);
             transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 20; border-bottom: 2px solid #d8bcbc; backface-visibility: hidden;
+            z-index: 30; border-bottom: 2px solid #d8bcbc; backface-visibility: hidden;
         }
         .envelope.open .env-flap { transform: rotateX(180deg); z-index: 1; }
 
-        /* Pocket / Letter sliding inside */
-        .env-pocket {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, #f3dfdf 0%, #ecd5d5 100%);
-            z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 40px;
+        /* The Letter that slides OUT of the envelope */
+        .sliding-letter {
+            position: absolute; bottom: 20px; left: 20px; right: 20px; height: 380px;
+            background: #fff; border-radius: 8px; border: 2px solid var(--baraat-gold);
+            padding: 30px 20px; text-align: center; z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(0); transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .envelope.open .sliding-letter {
+            transform: translateY(-220px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
 
         /* Wax Seal Button */
         .wax-seal {
-            width: 85px; height: 85px; background: radial-gradient(circle, #dfbe55 0%, #a47d1b 100%);
-            border-radius: 50%; z-index: 25; display: flex; justify-content: center; align-items: center;
+            width: 75px; height: 75px; background: radial-gradient(circle, #dfbe55 0%, #a47d1b 100%);
+            border-radius: 50%; z-index: 40; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 6px 15px rgba(164,125,27,0.5); cursor: pointer; border: 4px dashed #fff;
-            font-family: 'Cinzel', serif; font-weight: 700; color: #fff; font-size: 1.4rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; margin-bottom: 25px; position: relative;
+            font-family: 'Cinzel', serif; font-weight: 700; color: #fff; font-size: 1.3rem;
+            transition: transform 0.3s ease; position: absolute; top: 130px; left: 50%; transform: translateX(-50%);
         }
-        .wax-seal:hover { transform: scale(1.12); box-shadow: 0 10px 20px rgba(164,125,27,0.7); }
+        .wax-seal:hover { transform: translateX(-50%) scale(1.1); }
 
-        .env-text { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--baraat-red); text-align: center; z-index: 10; }
-        .env-text span { display: block; font-size: 0.8rem; font-style: italic; color: #666; margin-top: 5px; }
-
-        /* --- STAGE 2: MAIN INVITATION SITE & FLIP/SLIDE ANIMATIONS --- */
+        /* --- STAGE 2: MAIN INVITATION SITE --- */
         #main-content {
-            opacity: 0; transform: translateY(50px) scale(0.95);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            display: none;
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease; display: none;
         }
-        #main-content.visible { opacity: 1; transform: translateY(0) scale(1); display: block; }
-
-        .top-bar {
-            background: #111; color: white; padding: 12px 20px; text-align: center;
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-            position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .top-bar h1 { font-size: 1.1rem; font-family: 'Cinzel', serif; color: var(--baraat-gold); }
-        .action-btn {
-            background: var(--baraat-gold); color: #111; border: none; padding: 6px 14px;
-            border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: 0.2s;
-            display: inline-flex; align-items: center; gap: 6px;
-        }
-        .action-btn:hover { opacity: 0.9; transform: scale(1.05); }
+        #main-content.visible { opacity: 1; transform: translateY(0); display: block; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
         .guest-banner {
             background: linear-gradient(135deg, #fff, #f8f1f1); border: 2px solid var(--baraat-gold);
             border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); animation: fadeIn 1s ease-out;
         }
         .guest-banner h2 { font-family: 'Cinzel', serif; color: var(--baraat-red); font-size: 1.4rem; margin-bottom: 5px; }
 
-        /* Cascading 3D Card Flip & Slide-Up Effect */
+        /* Cascading 3D Card Reveal */
         .wedding-card {
             background: #fff; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             margin-bottom: 40px; overflow: hidden; border: 8px solid #fff; position: relative;
-            opacity: 0; transform: translateY(80px) rotateX(15deg);
+            opacity: 0; transform: translateY(60px) rotateX(10deg);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .wedding-card.reveal { opacity: 1; transform: translateY(0) rotateX(0deg); }
@@ -138,43 +127,29 @@
             background: var(--baraat-red); color: white; border: none; padding: 12px 30px;
             border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 10px; font-size: 1rem;
         }
-
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; text-align: left; position: relative; }
-        .modal-content h3 { font-family: 'Cinzel', serif; margin-bottom: 15px; color: var(--baraat-red); }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; }
     </style>
 </head>
 <body>
 
-    <!-- STAGE 1: 3D ENVELOPE OPENING ANIMATION -->
+    <!-- STAGE 1: ENVELOPE FLAP & SLIDING LETTER -->
     <div id="envelope-wrapper">
         <div class="envelope-scene">
             <div class="envelope" id="envelopeBox">
                 <div class="env-flap"></div>
-                <div class="env-pocket">
-                    <div class="wax-seal" id="waxSealBtn">
-                        <i class="fa-solid fa-ring"></i>
-                    </div>
-                    <div class="env-text">
-                        Major Yasir & Family
-                        <span>Tap the wax seal to unfold ✨</span>
-                    </div>
+                <div class="sliding-letter">
+                    <p style="font-family: 'Great Vibes'; font-size: 1.8rem; color: #5c1d24;">Wedding Invitation</p>
+                    <p style="font-family: 'Cinzel'; font-size: 0.95rem; font-weight: 700; margin-top: 10px;">Major Yasir & Family</p>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Tap seal to open ✨</p>
+                </div>
+                <div class="wax-seal" id="waxSealBtn">
+                    <i class="fa-solid fa-ring"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- STAGE 2: MAIN INVITATION SITE -->
+    <!-- STAGE 2: MAIN INVITATION SITE (Clean for Guests, No Admin Bars) -->
     <div id="main-content">
-        <div class="top-bar">
-            <h1>Major Yasir's Wedding Portal</h1>
-            <button class="action-btn" onclick="openShareModal()"><i class="fa-solid fa-share-nodes"></i> Share Custom Link</button>
-        </div>
-
         <div class="container">
             <div class="guest-banner">
                 <h2 id="welcomeGuestTitle">Warm Greetings!</h2>
@@ -272,50 +247,30 @@
         </div>
     </div>
 
-    <!-- SHARE MODAL -->
-    <div id="shareModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeShareModal()">&times;</span>
-            <h3>Generate Guest Invitation Link</h3>
-            <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Select which events this specific guest is invited to:</p>
-            
-            <input type="text" id="guestNameInput" placeholder="Guest Name (e.g. Uncle Jawad)" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
-            
-            <div style="margin: 10px 0; font-size: 0.9rem;">
-                <label><input type="checkbox" id="chkMehandi" checked> Mehandi (Nov 10)</label><br>
-                <label><input type="checkbox" id="chkBaraat" checked> Baraat (Nov 11)</label><br>
-                <label><input type="checkbox" id="chkWalima" checked> Walima (Nov 12)</label>
-            </div>
-
-            <button onclick="generateCustomLink()" style="width:100%; background:var(--baraat-red); color:white; border:none; padding:10px; border-radius:6px; font-weight:600; cursor:pointer; margin-top:10px;">Copy WhatsApp Invite & Link</button>
-        </div>
-    </div>
-
     <script>
-        // Exact 3D Unfolding Sequence
+        // Exact Video Sequence: Flap opens -> Letter slides out -> Site reveals cards
         document.getElementById('waxSealBtn').addEventListener('click', function() {
             const envelopeBox = document.getElementById('envelopeBox');
             const wrapper = document.getElementById('envelope-wrapper');
             const mainContent = document.getElementById('main-content');
 
-            // 1. Fold envelope flap back (3D rotation)
+            // 1. Open the flap and slide the letter out
             envelopeBox.classList.add('open');
 
-            // 2. Fade out envelope wrapper, slide in main site, and trigger cascading card flips
+            // 2. After slide-out completes, fade envelope and unveil celebration cards with a 3D flip
             setTimeout(() => {
                 wrapper.classList.add('hidden');
                 mainContent.classList.add('visible');
 
-                // Staggered 3D card flip & slide up reveal
                 const cards = document.querySelectorAll('.wedding-card');
                 cards.forEach((card, index) => {
                     if (card.style.display !== 'none') {
                         setTimeout(() => {
                             card.classList.add('reveal');
-                        }, index * 300);
+                        }, index * 250);
                     }
                 });
-            }, 800);
+            }, 1000);
         });
 
         // Parse URL Hash Parameters for Guest Personalization & Event Filtering
@@ -344,25 +299,6 @@
             }
         });
 
-        function openShareModal() { document.getElementById('shareModal').style.display = 'flex'; }
-        function closeShareModal() { document.getElementById('shareModal').style.display = 'none'; }
-
-        function generateCustomLink() {
-            const name = document.getElementById('guestNameInput').value.trim() || 'Guest';
-            const m = document.getElementById('chkMehandi').checked ? '1' : '0';
-            const b = document.getElementById('chkBaraat').checked ? '1' : '0';
-            const w = document.getElementById('chkWalima').checked ? '1' : '0';
-
-            const baseUrl = window.location.href.split('#')[0];
-            const customUrl = `${baseUrl}#guest=${encodeURIComponent(name)}&m=${m}&b=${b}&w=${w}`;
-
-            const whatsappText = `﷽\n*Mr. & Mrs. Mulazim Hussain* cordially invite you, *${name}*, to celebrate the wedding festivities of *Major Yasir & D/o Muhammad Taj Sabir*.\n\n💌 *Tap here to open your digital invitation card:*\n${customUrl}`;
-            
-            navigator.clipboard.writeText(whatsappText);
-            alert(`Invitation message for "${name}" copied to clipboard! Paste it directly into WhatsApp.`);
-            closeShareModal();
-        }
-
         // Database RSVP Submission (Google Sheets Web App)
         function submitRSVP(e) {
             e.preventDefault();
@@ -371,7 +307,7 @@
             const status = document.getElementById('rsvpStatus').value;
             const wishes = document.getElementById('rsvpWishes').value;
 
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyYtOrGh-Z3X1WT1kfvCa7uD6NncBoyAxHEPAaGd3Daro9C4x1xOvEcGAcJFyS7duM/exec'; // Paste your Google Apps Script Web App URL here if configured
+            const scriptURL = ''; // Paste your Google Apps Script Web App URL here if configured
 
             if(scriptURL) {
                 fetch(scriptURL, { method: 'POST', body: JSON.stringify({name, event, status, wishes}) })
